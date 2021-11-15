@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import classnames from 'classnames/bind';
 import { HashRouter as Router, Switch, Route, NavLink } from 'react-router-dom';
 
@@ -12,6 +12,8 @@ import ReactRouterExample from './ReactRouterExample';
 
 import styles from './app.scss';
 
+const Intro = lazy(() => import('./Intro'));
+
 const cx = classnames.bind(styles);
 
 const App = () => {
@@ -21,41 +23,43 @@ const App = () => {
         <Sidebar />
         
         <div className={cx('mainContent')}>
-          <Switch>
-            <Route path="/basic">
-              <ExampleBasic />
-              <ExampleRight />
-              <ExampleOutsideClick />
-              <ExampleNoPortal />
-            </Route>
-            <Route path="/nested">
-              <ExampleNestedAuto />
-              <ExampleNested />
-              <ExampleNestedAutoNoClose />
-              <ExampleNestedNoClose />
-            </Route>
-            <Route path="/multiple">
-              <ExampleMultipleGroupAuto />
-              <ExampleMultipleGroup />
-              <ExampleMultipleGroupAutoNested />
-              <ExampleMultipleGroupAutoNestedNoClose />
-            </Route>
-            <Route path="/controlled">
-              <ExampleControlled />
-              <ExampleControlledNested />
-            </Route>
-            <Route path="/external">
-              <ExampleContext />
-              <ExampleMST />
-              <ExampleReactRouter />
-            </Route>
-            <Route path="/misc">
-              <ExampleDestroy />
-            </Route>
-            <Route path="/">
-              <Intro />
-            </Route>
-          </Switch>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Switch>
+              <Route path="/basic">
+                <ExampleBasic />
+                <ExampleRight />
+                <ExampleOutsideClick />
+                <ExampleNoPortal />
+              </Route>
+              <Route path="/nested">
+                <ExampleNestedAuto />
+                <ExampleNested />
+                <ExampleNestedAutoNoClose />
+                <ExampleNestedNoClose />
+              </Route>
+              <Route path="/multiple">
+                <ExampleMultipleGroupAuto />
+                <ExampleMultipleGroup />
+                <ExampleMultipleGroupAutoNested />
+                <ExampleMultipleGroupAutoNestedNoClose />
+              </Route>
+              <Route path="/controlled">
+                <ExampleControlled />
+                <ExampleControlledNested />
+              </Route>
+              <Route path="/external">
+                <ExampleContext />
+                <ExampleMST />
+                <ExampleReactRouter />
+              </Route>
+              <Route path="/misc">
+                <ExampleDestroy />
+              </Route>
+              <Route path="/">
+                <Intro />
+              </Route>
+            </Switch>
+          </Suspense>
         </div>
       </Router>
     </div>
@@ -95,29 +99,6 @@ const Sidebar = () => (
 );
 
 /* ************* basic ************* */
-
-const Intro = () => (
-  <>
-    <h1>react-nested-popper</h1>
-    <div className={cx('libLinks', 'intro')}>
-      <a target="_blank" href="https://github.com/runfaj/react-nested-popper">github</a>
-      <a target="_blank" href="https://www.npmjs.com/package/react-nested-popper">npm</a>
-    </div>
-    <p>
-      react-nested-popper is a react library based on V2
-      {' '}
-      <a href="https://popper.js.org/" target="_blank">popper.js</a>
-      , but with added features created to handle a number of popper scenarios that other libraries fail to capture:
-    </p>
-    <ul>
-      <li>handling for nesting and popper groups, combined with outside clicks</li>
-      <li>proper handling for context with nested popper content</li>
-      <li>full implementation of popper.js allowing all popper options</li>
-      <li>support for portals to decouple the popper content</li>
-    </ul>
-    <p>This library is an unstyled, functionality-only library, so all of the examples will demonstrate functionality and available options, combined with custom styling for this demo. You can find all available options and usage via the link above.</p>
-  </>
-);
 
 const ExampleBasic = () => (
   <DisplayBlock

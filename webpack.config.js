@@ -6,37 +6,27 @@ const TerserPlugin = require('terser-webpack-plugin');
 const AutoPrefixerPlugin = require('autoprefixer');
 const CSSNanoPlugin = require('cssnano');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const UnminifiedWebpackPlugin = require('unminified-webpack-plugin');
 
 const { NODE_ENV = 'development' } = process.env;
-const useProductionBuild = NODE_ENV === 'production';
+const useProductionBuild = true; // NODE_ENV === 'production';
 
 module.exports = {
   mode: useProductionBuild ? 'production' : 'development',
   devtool: useProductionBuild ? 'source-map' : 'cheap-module-eval-source-map',
-  stats: 'errors-only',
+  stats: 'errors-warnings',
   devServer: {
     compress: true,
-    contentBase: false,
     historyApiFallback: true,
     hot: true,
     port: 8765,
-    stats: {
-      assets: false,
-      children: false,
-      chunkModules: false,
-      chunks: false,
-      colors: true,
-      hash: false,
-      version: false,
-      modules: false,
-      warningsFilter: warning => !_.contains(warning, 'WARNING in chunk') && !_.contains(warning, 'Conflicting order between'),
-    },
   },
   entry: {
     lib: path.resolve(__dirname, 'src/index.js'),
     demo: path.resolve(__dirname, 'demo/index.js'),
   },
   output: {
+    chunkFilename: '[name].[contenthash].js',
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
     pathinfo: false,
@@ -58,7 +48,6 @@ module.exports = {
       },
       minimizer: [
         new TerserPlugin({
-          sourceMap: true,
           terserOptions: {
             output: {
               comments: false,
@@ -80,9 +69,6 @@ module.exports = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: !useProductionBuild,
-            },
           },
           {
             loader: 'css-loader',
@@ -97,12 +83,13 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              plugins: [
-                AutoPrefixerPlugin,
-                CSSNanoPlugin,
-              ],
+              postcssOptions: {
+                plugins: [
+                  AutoPrefixerPlugin,
+                  CSSNanoPlugin,
+                ],
+              },
               sourceMap: true,
-              modules: true,
             },
           },
           {
@@ -117,6 +104,8 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
+
+    new UnminifiedWebpackPlugin(), // adds a non-minified file alongside the minified one
 
     new MiniCssExtractPlugin({
       filename: '[name].css',

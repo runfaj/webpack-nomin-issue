@@ -1,7 +1,7 @@
 {
-  "name": "react-nested-popper",
+  "name": "webpack-issue",
   "version": "1.0.0",
-  "description": "A react library based on popper.js that supports nested poppers and proper context binding.",
+  "description": "webpack-nomin-issue",
   "main": "dist/lib.js",
   "scripts": {
     "build": "webpack --mode=production",
@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/runfaj/react-nested-popper.git"
+    "url": "git+https://github.com/runfaj/webpack-nomin-issue.git"
   },
   "keywords": [
     "react",
@@ -33,9 +33,9 @@
   "author": "Stuart Roskelley",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/runfaj/react-nested-popper/issues"
+    "url": "https://github.com/runfaj/webpack-nomin-issue/issues"
   },
-  "homepage": "https://github.com/runfaj/react-nested-popper#readme",
+  "homepage": "https://github.com/runfaj/webpack-nomin-issue#readme",
   "peerDependencies": {
     "react": "^16.x",
     "react-dom": "^16.x"
@@ -71,13 +71,13 @@
     "@babel/plugin-transform-runtime": "^7.8.3",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
-    "autoprefixer": "^9.7.4",
+    "autoprefixer": "^10.4.0",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^25.1.0",
     "babel-loader": "^8.0.6",
-    "clean-webpack-plugin": "^3.0.0",
-    "css-loader": "^3.4.2",
-    "cssnano": "^4.1.10",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.5.1",
+    "cssnano": "^5.0.10",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "eslint": "^6.8.0",
@@ -88,20 +88,21 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.18.0",
     "gh-pages": "^2.2.0",
-    "html-webpack-plugin": "^3.2.0",
+    "html-webpack-plugin": "^5.5.0",
     "jest": "^25.1.0",
     "jquery": "^3.4.1",
-    "mini-css-extract-plugin": "^0.9.0",
-    "node-sass": "^4.13.1",
-    "postcss-loader": "^3.0.0",
+    "mini-css-extract-plugin": "^2.4.4",
+    "node-sass": "^6.0.1",
+    "postcss-loader": "^6.2.0",
     "react": "^16.12.0",
     "react-addons-test-utils": "^15.6.2",
     "react-dom": "^16.12.0",
     "react-test-renderer": "^16.12.0",
-    "sass-loader": "^8.0.2",
-    "terser-webpack-plugin": "^2.3.3",
-    "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.10.1"
+    "sass-loader": "^12.3.0",
+    "terser-webpack-plugin": "^5.2.5",
+    "unminified-webpack-plugin": "^3.0.0",
+    "webpack": "^5.64.1",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.5.0"
   }
 }
